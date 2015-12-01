@@ -1,6 +1,7 @@
 package eurecom.fr.mycontactlist;
 
 import android.app.LoaderManager;
+import android.content.Intent;
 import android.content.Loader;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -27,6 +28,8 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         setContentView(R.layout.activity_main);
         listView = (ListView) findViewById(R.id.listView1);
 
+        //W:
+        listView.setOnItemClickListener(this);
 
     }
 
@@ -65,6 +68,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         ContactAdapter Ca = new ContactAdapter(this, R.layout.contact, contacts);
         listView.setAdapter(Ca); //new ContactAdapter(this, R.layout.contact, contacts));
 
+
     }
 
     @Override
@@ -79,6 +83,8 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
+        //W:
+        Log.isLoggable("id selectioné: ", id);
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
@@ -92,7 +98,16 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
         Log.i("Main:", "someone clicked on item: " + position);
-        //TODO: start ModifyContactActivity
+
+        //W:
+        //start ModifyContactActivity
+        Contact contact = (Contact) parent.getAdapter().getItem(position);
+        Intent intent = new Intent(this,ModifyContactActivity.class);
+        intent.putExtra("contact", contact);
+        startActivity(intent);
+
 
     }
+
+
 }

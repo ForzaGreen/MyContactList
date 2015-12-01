@@ -16,7 +16,7 @@ import java.util.Map;
 
 public class ResponseHandler {
 
-    private final String url = "YOUR GAE LINK";
+    private final String url = "http://1-dot-high-producer-109012.appspot.com/"; //"YOUR GAE LINK" // contactslist?respType=json
 
     private Context context;
     private String request;
@@ -61,6 +61,7 @@ public class ResponseHandler {
             try {
                 out = postData();
                 Log.i("Response==", out);
+                respond(out); //W
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -75,7 +76,6 @@ public class ResponseHandler {
         return out;
     }
 
-    // A revoir
     public void respond(String response)
     {
         /* To be implemented
@@ -84,6 +84,12 @@ public class ResponseHandler {
         * If not simply state that a problem has occurred
         * Remember to conclude the activity
         * */
+
+        //W:
+        if(response == "OK") {
+            popUp("Operation succeded ;) !");
+        }
+        finish(); //W
     }
 
     private String convertParameters(Map <String,String> data){
@@ -116,6 +122,7 @@ public class ResponseHandler {
         URL page = new URL(request);
         HttpURLConnection conn = null;
         conn = (HttpURLConnection) page.openConnection();
+        //TODO: delete
         conn.connect();
         InputStreamReader in = null;
         String message = conn.getResponseMessage();

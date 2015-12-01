@@ -64,12 +64,18 @@ public class ModifyContactActivity extends AppCompatActivity implements android.
     @Override
     public void onClick(View v){
         Handler handler= new Handler();
+        //W:
+        //Log.i("onClick", "I am in onClick of ModifyContactActivity");
+
         if (v.getId()== R.id.modify){
             Log.i("main", "I clicked modify");
             Map<String,String> data = new HashMap<String,String>();
             data.put("name", name.getText().toString());
             data.put("email",email.getText().toString());
             data.put("phone",number.getText().toString());
+            //W:
+            Log.i("//W: contact id: ", contact.getId());
+
             ResponseHandler rh = new ResponseHandler(this,"save?id=" + contact.getId(), "POST", handler, this, data);
             new ModifyTask().execute(rh);
 
